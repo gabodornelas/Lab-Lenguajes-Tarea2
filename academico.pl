@@ -15,6 +15,7 @@ nota(ana, ci3661, 88).
 nota(ana, ci3725, 70).
 nota(juan, ci3661, 40). % juan reprobó :c
 nota(elena, ci2691, 51).
+nota(elena, ci3725, 49).
     % elena no tiene nota en ci3725 (la esta cursando)
 
 profesor_de(Prof, Est):-
@@ -22,12 +23,13 @@ profesor_de(Prof, Est):-
     cursa(Est, Mat).
 
 aprobado(Est, Mat):-
-    cursa(Est, Mat),
+    cursa(Est, Mat),          % tiene que haberla cursado para tener una nota
     nota(Est, Mat, Nota),
     Nota >= 50.
 
 aplazado(Est):-
-    nota(Est, _, Nota),
+    cursa(Est, Mat),          % tiene que haberla cursado para tener una nota
+    nota(Est, Mat, Nota),
     Nota < 50.
 
 cursando_sin_nota(Est, Mat):-
